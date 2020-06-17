@@ -1,5 +1,6 @@
 from tkinter import *
 from PIL import ImageTk,Image
+from tkinter import messagebox
 root=Tk()
 root.title("Map-Prototype")
 
@@ -10,9 +11,9 @@ CrDes_fr.grid(row=0,column=0)
 Map_fr=LabelFrame(root,padx=40,pady=40,text="Map")
 Map_fr.grid(row=0,column=1)
 
-Lbl1=Label(CrDes_fr,text="Silahkan Masukkan Lokasi").pack()
+Lbl1=Label(CrDes_fr,text="Silahkan Masukkan Lokasi").grid(row=0,column=0) 
 Lbl2=Label(Map_fr,text="Peta Kampus Tembalang").pack()
-JC_img=ImageTk.PhotoImage(Image.open("JC.png"))
+
 Map_img=Image.open("Map-00.png")
 Rz=Map_img.resize((650,400), Image.ANTIALIAS)
 
@@ -392,8 +393,10 @@ des=StringVar()
 Places=['1.Widya Puraya','2.Gedung Serbaguna','3.ICT Center','4.Lab Terpadu','5.Stadion','6.Waduk Pendidikan','7.Sekolah Vokasi','8.Fakultas Hukum',
         '9.Fakultas Ilmu Budaya','10.Fakultas Ilmu Sosial','11.Fakultas Teknik','12. Fakultas Peternakan dan Pertanian','13.Fakultas Perikanan dan Ilmu Kelautan',
         '14.Fakultas Psikologi','15.Fakultas Kedokteran','16.Fakultas Kesehatan Masyarakat','17.Fakultas Ekonomika dan Bisnis','18.Fakultas Sains dan Matematika','19.Gedung Prof. Soedarto']     
-Now=OptionMenu(CrDes_fr, nw, *Places).pack()
-Dest=OptionMenu(CrDes_fr, des,*Places).pack()        
+Now=OptionMenu(CrDes_fr, nw, *Places).grid(row=1,column=0,columnspan=2)
+Dest=OptionMenu(CrDes_fr, des,*Places).grid(row=2,column=0,columnspan=2)        
+nw.set("Pilih Lokasi anda")
+des.set("Pilih Tujuan")
 
 global Choice
 Choice=[]
@@ -421,7 +424,7 @@ def TranslatePlace(x):
  def N7():
   Choice.append('n24')
  def N8():
-  Choice.append('n26')
+  Choice.append('n25')
  def N9():
   Choice.append('n29') 
  def N10():
@@ -454,15 +457,22 @@ def TranslatePlace(x):
 # OK Button and the function that triggered by the OK Button
 def OK():
     Reset()
-    TranslatePlace(nw.get())
-    TranslatePlace(des.get())
-    Crnt=Choice[0]
-    WtG=Choice[1]
-    dijkstra(graph, Crnt, WtG)
-    MkLn()
-    print (path)
+    yl=nw.get()
+    yd=des.get()
+    if (yl=="Pilih Lokasi anda" or yd=="Pilih Tujuan"):
+     messagebox.showinfo("Kosong", "Harap isi Lokasi dan Tujuan.")
+    elif (yl==yd):
+     messagebox.showinfo("Warning", "Posisi dan Tujuan sama. Harap memilih yang berbeda.")
+    else:    
+     TranslatePlace(yl)
+     TranslatePlace(yd)
+     Crnt=Choice[0]
+     WtG=Choice[1]
+     dijkstra(graph, Crnt, WtG)
+     MkLn()
+     print (path)
     
-Enter_B=Button(CrDes_fr,text="Go",command=OK).pack() 
+Enter_B=Button(CrDes_fr,text="Go",command=OK).grid(row=3,column=0) 
 
 
 
