@@ -45,7 +45,7 @@ graph = {
     'n15':{'n19':2,'n10':1},
     'n16':{'n51':7,'n17':1},
     'n17':{'n18':1,'n16':1},
-    'n18':{'n32':2,'n9':3},
+    'n18':{'n32':2,'n9':3,'n17':1},
     'n19':{'n15':2,'n31':3},
     'n20':{'n14':1,'n21':1,'n25':1},
     
@@ -276,7 +276,7 @@ def MkLn():
      l=sm+ag      
      coordinates[path[l]]()
     ag+=1 
-    Canvas1.create_line(*coor, fill="red",width=2)
+    Canvas1.create_line(*coor, fill="red",width=3)
 #========================================================================
 #This is where the Algorithm is. We use it as a function
 path = []
@@ -299,7 +299,7 @@ def dijkstra(graph,start,goal):
         'n15':{'n19':2,'n10':1},
         'n16':{'n51':7,'n17':1},
         'n17':{'n18':1,'n16':1},
-        'n18':{'n32':2,'n9':3},
+        'n18':{'n32':2,'n9':3,'n17':1},
         'n19':{'n15':2,'n31':3},
         'n20':{'n14':1,'n21':1,'n25':1},
         'n21':{'n22':1,'n24':1,'n28':2,'n20':1},
@@ -407,7 +407,7 @@ def Reset():
     Canvas1.delete("all")
     Canvas1.create_image(0, 0 , anchor=NW, image=MapRz_img)
     
-# This function is self explanatory. Males jelasin di comment aja sih wkwk    
+# This function is self explanatory.  
 def TranslatePlace(x):
  def N1():
   Choice.append('n40')
